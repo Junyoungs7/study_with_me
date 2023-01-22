@@ -78,7 +78,9 @@ export default function Login() {
             response.data.tokenDTO.accessTokenExpiresIn;
           const grantType = response.data.tokenDTO.grantType;
           const refreshToken = response.data.tokenDTO.refreshToken;
+          const userName = response.data.tokenDTO.userName;
           if (response.data.status === "OK") {
+            localStorage.setItem("userName", userName);
             localStorage.setItem("accessToken", accessToken);
             localStorage.setItem("accessTokenExpiresIn", accessTokenExpiresIn);
             localStorage.setItem("grantType", grantType);

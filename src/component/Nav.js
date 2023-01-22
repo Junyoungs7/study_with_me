@@ -9,8 +9,10 @@ import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
 
 export default function Nav() {
+  const userName = localStorage.getItem("userName");
   function logout() {
     localStorage.clear();
+    window.location.assign("/");
   }
   return (
     <>
@@ -35,33 +37,51 @@ export default function Nav() {
             >
               SWU
             </Typography>
-            <Button color="inherit">
-              <Typography
-                textAlign="center"
-                variant="h6"
-                component="div"
-                sx={{ flexGrow: 1 }}
-              >
-                개인 스터디
-              </Typography>
-            </Button>
-            <IconButton color="inherit" justify="flex-end">
-              <Link
-                to="/login"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                Login
-              </Link>
-            </IconButton>
-            <IconButton color="inherit" justify="flex-end">
-              <Link
-                to="/"
-                style={{ textDecoration: "none", color: "inherit" }}
-                onClick={logout}
-              >
-                Logout
-              </Link>
-            </IconButton>
+
+            {!userName ? (
+              <IconButton color="inherit" justify="flex-end">
+                <Link
+                  to="/login"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Login
+                </Link>
+              </IconButton>
+            ) : (
+              <>
+                <Button color="inherit">
+                  <Typography
+                    textAlign="center"
+                    variant="h6"
+                    component="div"
+                    sx={{ flexGrow: 1 }}
+                  >
+                    <Link
+                      to="/private"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      개인 스터디
+                    </Link>
+                  </Typography>
+                </Button>
+                <Typography
+                  textAlign="right"
+                  variant="h6"
+                  component="div"
+                  sx={{ flexGrow: 1 }}
+                >
+                  {userName}님
+                </Typography>
+                <IconButton color="inherit" justify="flex-end" onClick={logout}>
+                  <Link
+                    to="/"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    Logout
+                  </Link>
+                </IconButton>
+              </>
+            )}
           </Toolbar>
         </AppBar>
       </Box>

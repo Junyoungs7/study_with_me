@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./route/NotFound";
 import Login from "./route/Login";
 import Register from "./route/Register";
+import Main from "./route/Main";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route path="/" element={<PrivateStudyPage />}></Route>
+          <Route path="/" element={<Main />}></Route>
+          <Route path="/private" element={<PrivateStudyPage />}></Route>
           <Route path="/todo/:id" element={<TodoPage />}></Route>
           <Route path="*" element={<NotFound />}></Route>
           <Route path="/login" element={<Login />}></Route>
